@@ -1,0 +1,7 @@
+{
+  "app": "app",
+  "appServicePlan": "plan",
+  "cognitiveServicesAccount": "cog",
+  "resourceGroup": "rg",
+  "webApp": "app"
+}
