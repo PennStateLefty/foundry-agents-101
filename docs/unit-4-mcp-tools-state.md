@@ -87,7 +87,7 @@ Let's start by seeing the lightbulb application in its default state.
 
 Now let's give your agent the ability to control the lightbulb by connecting the MCP server.
 
-1. Open the [Microsoft Foundry portal](https://foundry.microsoft.com) and navigate to your project.
+1. Open the [Microsoft Foundry portal](https://ai.azure.com) and navigate to your project.
 2. In the left-hand navigation, click on **Agents**.
 3. Select the **Lightbulb Assistant** agent to open its configuration.
 4. Scroll down to the **Tools** section (where you previously added the Microsoft Learn MCP connection).
@@ -217,7 +217,7 @@ Let's look at everything you've accomplished across all four units:
 The progression tells the story of what makes AI agents powerful:
 
 1. **Start with a personality** — define what the agent is and how it should behave
-2. **Give it knowledge** — connect it to information sources so it can answer questions
+2. **Give it tools for information** — connect it to sources like Bing so it can answer questions
 3. **Give it read tools** — let it discover and retrieve data from external systems
 4. **Give it write tools** — let it take actions that change the world
 
@@ -248,7 +248,7 @@ Here's a quick reference of the key concepts covered in this unit:
 Take a moment to appreciate what you built. Starting from nothing, you now have:
 
 - 🤖 A **declarative agent** with a custom persona and clear instructions
-- 🌐 **Web knowledge** via Grounding with Bing for real-time information
+- 🌐 **Web search** via Grounding with Bing for real-time information
 - 📚 **Documentation access** via the Microsoft Learn MCP connection
 - 💡 **Real application control** via your custom lightbulb MCP server
 - 🔄 An agent that **reasons, chains tools, and takes real actions** — all without a single line of agent code

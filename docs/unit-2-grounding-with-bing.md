@@ -4,7 +4,7 @@
 
 Welcome to Unit 2 of the **AI Agents with Microsoft Foundry** lab series! In this unit, you'll supercharge the declarative agent you built in Unit 1 by adding **Grounding with Bing** — giving your agent the ability to search the web for real-time information.
 
-Right now, your agent can only respond using the knowledge baked into its underlying language model. That means it can't tell you today's weather, the latest news, or anything that happened after its training cutoff. By adding Bing as a knowledge source, your agent will be able to pull in current, relevant information from the web — and cite its sources.
+Right now, your agent can only respond using the knowledge baked into its underlying language model. That means it can't tell you today's weather, the latest news, or anything that happened after its training cutoff. By adding Bing as a tool, your agent will be able to pull in current, relevant information from the web — and cite its sources.
 
 The best part? You won't write a single line of code. This is the power of declarative agents in Foundry: extending capabilities is a matter of **configuration, not code**.
 
@@ -19,7 +19,7 @@ Before starting this unit, make sure you have:
 - ✅ Completed [Unit 1: Creating a Declarative Agent in Foundry](./unit-1-declarative-agent.md)
 - ✅ Your **Lightbulb Assistant** agent is working in the Foundry playground
 - ✅ Infrastructure deployed via `azd up` (this provisions the Bing Grounding resource automatically)
-- ✅ Access to the [Azure Portal](https://portal.azure.com) and the [Microsoft Foundry portal](https://foundry.microsoft.com)
+- ✅ Access to the [Azure Portal](https://portal.azure.com) and the [Microsoft Foundry portal](https://ai.azure.com)
 
 > **📝 Note:** The `azd up` deployment from the main README provisions a Grounding with Bing resource in your Azure resource group. If you skipped that step or the resource wasn't created, go back to the [main README](../README.md) and redeploy before continuing.
 
@@ -43,7 +43,7 @@ When you chat with a language model, it generates responses based on patterns le
 
 > **💡 Tip:** Think of Grounding with Bing as giving your agent a web browser. Instead of guessing, it can look things up — just like you would.
 
-This is a game-changer for agents that need to provide accurate, real-time information. And in Foundry, adding it is as simple as toggling a knowledge source.
+This is a game-changer for agents that need to provide accurate, real-time information. And in Foundry, adding it is as simple as adding a tool.
 
 ---
 
@@ -71,21 +71,21 @@ Before configuring the agent, let's verify that the Bing Grounding resource exis
 
 Now let's connect the Bing Grounding resource to the agent you created in Unit 1.
 
-1. Open the [Microsoft Foundry portal](https://foundry.microsoft.com) and navigate to your project.
+1. Open the [Microsoft Foundry portal](https://ai.azure.com) and navigate to your project.
 2. In the left-hand navigation, click on **Agents**.
 3. Select the **Lightbulb Assistant** agent you created in Unit 1 to open its configuration.
-4. Scroll down to the **Knowledge** section of the agent configuration.
-5. Click **+ Add Knowledge** (or the equivalent button to add a new knowledge source).
-6. From the list of available knowledge sources, select **Grounding with Bing Search**.
+4. Scroll down to the **Tools** section of the agent configuration.
+5. Click **+ Add Tool** (or the equivalent button to add a new tool).
+6. From the list of available tool types, select **Grounding with Bing Search**.
 7. Foundry will prompt you to connect the resource:
    - Select the **Bing Grounding resource** from your Azure subscription.
    - Confirm the connection.
-8. Once added, you should see **Grounding with Bing Search** listed under the Knowledge section.
+8. Once added, you should see **Grounding with Bing Search** listed under the Tools section.
 9. **Save** your agent configuration.
 
 > **💡 Tip:** You don't need to change your agent's instructions to use Bing Grounding. The agent will automatically decide when to search the web based on the user's question. If the question can be answered from the model's training data alone, it may not trigger a web search — and that's fine.
 
-> **📝 Note:** It may take a moment for the knowledge source to become active after saving. If your first test doesn't show web results, wait a few seconds and try again.
+> **📝 Note:** It may take a moment for the tool to become active after saving. If your first test doesn't show web results, wait a few seconds and try again.
 
 ---
 
@@ -148,7 +148,7 @@ Congratulations! 🎉 You've added real-time web knowledge to your declarative a
 
 ### Key Takeaway
 
-Adding knowledge to a declarative agent is **configuration, not code**. You didn't write any code, deploy any services, or modify any prompts. You simply connected a knowledge source through the Foundry UI, and your agent immediately became more capable.
+Adding Bing Grounding to a declarative agent is **configuration, not code**. You didn't write any code, deploy any services, or modify any prompts. You simply connected a tool through the Foundry UI, and your agent immediately became more capable.
 
 This pattern — extending agents through configuration — is a core principle of Foundry's declarative approach. As you'll see in the next units, the same pattern applies to tools and other capabilities.
 
@@ -168,7 +168,7 @@ Here's a quick reference of the key concepts covered in this unit:
 
 - **Hallucination** — When a language model generates information that sounds plausible but is factually incorrect. Grounding helps mitigate hallucination by giving the model access to authoritative sources.
 
-- **Knowledge Sources in Foundry** — Pluggable data sources that can be added to a declarative agent through the Foundry UI. Grounding with Bing is one example; others include file uploads, Azure AI Search indexes, and more.
+- **Tools in Foundry** — Pluggable capabilities that can be added to a declarative agent through the Foundry UI. Grounding with Bing is one example; others include MCP connections, file uploads, Azure AI Search indexes, and more.
 
 - **Declarative Configuration** — The pattern of extending agent capabilities through UI-based configuration rather than writing code. This makes it fast to iterate and accessible to non-developers.
 
