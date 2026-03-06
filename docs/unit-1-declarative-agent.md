@@ -15,7 +15,7 @@ By the end of this unit, you'll have a working agent that you can chat with in t
 Before starting this unit, make sure you have:
 
 - ✅ Completed the infrastructure deployment (`azd up`) as described in the [main README](../README.md)
-- ✅ Access to the Microsoft Foundry portal at [foundry.microsoft.com](https://foundry.microsoft.com)
+- ✅ Access to the Microsoft Foundry portal at [ai.azure.com](https://ai.azure.com)
 - ✅ Azure credentials with the appropriate permissions to your deployed resource group
 
 > **📝 Note:** If you haven't run `azd up` yet, go back to the root of this repository and follow the setup instructions in the README before continuing.
@@ -47,7 +47,7 @@ A declarative agent in Foundry has three core building blocks:
 
 ### Step 1: Navigate to Microsoft Foundry
 
-1. Open your browser and go to [foundry.microsoft.com](https://foundry.microsoft.com).
+1. Open your browser and go to [ai.azure.com](https://ai.azure.com).
 2. Sign in with the same Azure credentials you used during infrastructure deployment.
 3. Once signed in, you should see the Foundry portal home page.
 
@@ -132,7 +132,7 @@ This baseline agent is the starting point for the rest of the lab series. In eac
 
 ### What's Next
 
-In **Unit 2**, we'll add **Grounding with Bing Search** to give the agent access to real-time web knowledge. This means it will be able to answer questions about the world — not just respond based on its training data.
+In **Unit 2**, we'll add **Grounding with Bing Search** as a tool to give the agent access to real-time web information. This means it will be able to answer questions about the world — not just respond based on its training data.
 
 ---
 

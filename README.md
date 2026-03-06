@@ -22,7 +22,7 @@ A **lightbulb web application** (Python + React) with an MCP server that a Found
 - [Python 3.11+](https://www.python.org/downloads/)
 - [uv](https://docs.astral.sh/uv/getting-started/installation/) (Python package manager)
 - [Node.js 18+](https://nodejs.org/)
-- Access to [Microsoft Foundry](https://foundry.microsoft.com)
+- Access to [Microsoft Foundry](https://ai.azure.com)
 
 ## Getting Started
 

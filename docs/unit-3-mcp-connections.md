@@ -18,7 +18,7 @@ Before starting this unit, make sure you have:
 
 - ✅ Completed [Unit 2: Grounding with Bing](./unit-2-grounding-with-bing.md)
 - ✅ Your **Lightbulb Assistant** agent is working in the Foundry playground with Bing Grounding enabled
-- ✅ Access to the [Microsoft Foundry portal](https://foundry.microsoft.com)
+- ✅ Access to the [Microsoft Foundry portal](https://ai.azure.com)
 
 ---
 
@@ -58,16 +58,16 @@ MCP servers can communicate using different transport methods. The one you'll us
 
 Before we configure anything, let's understand how MCP fits into Foundry's architecture.
 
-In the previous units, you added **knowledge** to your agent (Grounding with Bing). Knowledge sources give the agent access to information — the agent can look things up and include what it finds in its responses.
+In the previous units, you added **Grounding with Bing** as a tool to your agent, giving it access to real-time web information. Now you'll add a different kind of tool — an **MCP connection** — that lets the agent **call external services** directly.
 
-**MCP tools are different.** Tools give the agent the ability to **take actions** — to call a function, run a query, or interact with an external system. The Microsoft Learn MCP server, for example, exposes tools that can search Microsoft's documentation library and return specific articles, code samples, and technical guidance.
+The Microsoft Learn MCP server, for example, exposes tools that can search Microsoft's documentation library and return specific articles, code samples, and technical guidance.
 
 Here's how it fits together:
 
 | Capability | Source | What It Does |
 |---|---|---|
 | Personality & instructions | System prompt (Unit 1) | Defines how the agent behaves |
-| Real-time web knowledge | Grounding with Bing (Unit 2) | Searches the web for current information |
+| Real-time web search | Grounding with Bing tool (Unit 2) | Searches the web for current information |
 | External tools | MCP connections (Unit 3) | Calls tools on remote servers |
 
 Foundry handles the MCP communication for you. When you add an MCP connection, Foundry will:
@@ -85,10 +85,10 @@ Foundry handles the MCP communication for you. When you add an MCP connection, F
 
 Now let's connect the Microsoft Learn MCP server to your agent.
 
-1. Open the [Microsoft Foundry portal](https://foundry.microsoft.com) and navigate to your project.
+1. Open the [Microsoft Foundry portal](https://ai.azure.com) and navigate to your project.
 2. In the left-hand navigation, click on **Agents**.
 3. Select the **Lightbulb Assistant** agent to open its configuration.
-4. Scroll down to the **Tools** section of the agent configuration (this is separate from the Knowledge section where you added Bing).
+4. Scroll down to the **Tools** section of the agent configuration (where you previously added Bing Grounding).
 5. Click **+ Add Tool** (or the equivalent button to add a new tool).
 6. From the list of tool types, select **MCP**.
 7. You'll be prompted to configure the MCP connection:
