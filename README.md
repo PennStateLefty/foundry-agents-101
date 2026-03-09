@@ -19,9 +19,31 @@ A **lightbulb web application** (Python + React) with an MCP server that a Found
 
 - Azure subscription
 - [Azure Developer CLI (`azd`)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+
+      **Windows Chocolatey Install**
+      In VS Code install azd:
+      ```powershell
+      choco install azd
+      ```
+      After installation, close and re-open VS Code:
+      ```powershell
+      azd version
+      ```
 - [Python 3.11+](https://www.python.org/downloads/)
 - [uv](https://docs.astral.sh/uv/getting-started/installation/) (Python package manager)
 - [Node.js 18+](https://nodejs.org/)
+
+      **Windows Chocolatey Install**
+      ```powershell
+      choco install nodejs
+      ```
+      If Chocolatey fails, download the installer directly from [nodejs.org](https://nodejs.org/) and run it.
+      
+      After installation, close and re-open VS Code, then verify:
+      ```powershell
+      node --version
+      npm --version
+      ```
 - Access to [Microsoft Foundry](https://ai.azure.com)
 
 ## Getting Started
@@ -33,12 +55,22 @@ git clone https://github.com/your-org/foundry-agents-101.git
 cd foundry-agents-101
 ```
 
-### 2. Deploy to Azure
+
+**Deploy to an existing resource group:**
+
+First, set your resource group name:
 
 ```bash
-azd auth login
+azd env set AZURE_RESOURCE_GROUP <your-resource-group-name>
+```
+
+Then deploy:
+
+```bash
 azd up
 ```
+
+Replace `<your-resource-group-name>` with the name of the resource group you want to use. The deployment will automatically use the resource group's region.
 
 This provisions all Azure resources (App Service, Foundry, Grounding with Bing) and deploys the lightbulb application.
 

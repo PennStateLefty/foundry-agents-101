@@ -66,6 +66,10 @@ static_dir = Path(__file__).parent / "static"
 if static_dir.exists():
     app.mount("/assets", StaticFiles(directory=static_dir / "assets"), name="assets")
 
+    @app.get("/")
+    async def serve_index():
+        return FileResponse(static_dir / "index.html")
+
     @app.get("/{full_path:path}")
     async def serve_frontend(full_path: str):
         file_path = static_dir / full_path

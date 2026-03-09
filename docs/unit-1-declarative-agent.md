@@ -65,7 +65,7 @@ Now let's create your first declarative agent.
 4. Give your agent a name:
 
    ```
-   Lightbulb Assistant
+   LightbulbAssistant
    ```
 
 5. In the **Instructions** field, enter the following system prompt:
@@ -74,7 +74,8 @@ Now let's create your first declarative agent.
    You are a helpful assistant that can control a smart lightbulb. You can turn the light on and off, and change its color. When the user asks you to perform an action on the lightbulb, confirm what you are doing. Be friendly and concise.
    ```
 
-6. Leave the remaining settings at their defaults for now — we'll customize these in later units.
+6. Remove the web search, we will look at that later.
+
 7. Click **Create** to save your new agent.
 
 > **💡 Tip:** Good instructions are specific about what the agent *can* do and *how* it should respond. Notice that we tell the agent to "confirm what you are doing" — this helps the user understand the agent's actions. In later units, we'll connect actual tools so the agent can *really* control a lightbulb.
