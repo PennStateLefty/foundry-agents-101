@@ -8,15 +8,6 @@ services:
     language: py
     host: appservice
 hooks:
-  preprovision:
-    posix:
-      shell: sh
-      run: ./infra/hooks/preprovision.sh
-      interactive: true
-    windows:
-      shell: pwsh
-      run: ./infra/hooks/preprovision.ps1
-      interactive: true
   predeploy:
     posix:
       shell: sh
