@@ -8,6 +8,11 @@ param environmentName string
 @description('Primary Azure region for resources')
 param location string
 
+@minLength(1)
+@maxLength(90)
+@description('Name of the Azure resource group')
+param resourceGroupName string
+
 var tags = {
   'azd-env-name': environmentName
 }
@@ -15,7 +20,7 @@ var tags = {
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2024-03-01' = {
-  name: 'rg-${environmentName}'
+  name: resourceGroupName
   location: location
   tags: tags
 }
