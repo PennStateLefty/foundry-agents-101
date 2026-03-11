@@ -8,6 +8,9 @@ param environmentName string
 @description('Primary Azure region for resources')
 param location string = resourceGroup().location
 
+@description('Principal ID of the user who needs Foundry access (defaults to the deployer)')
+param foundryUserPrincipalId string = deployer().objectId
+
 var tags = {
   'azd-env-name': environmentName
 }
@@ -47,6 +50,15 @@ module roleAssignments 'modules/role-assignments.bicep' = {
   name: 'role-assignments'
   params: {
     principalId: appService.outputs.webAppPrincipalId
+    foundryId: foundry.outputs.accountId
+  }
+}
+
+module userRoleAssignments 'modules/role-assignments.bicep' = {
+  name: 'user-role-assignments'
+  params: {
+    principalId: foundryUserPrincipalId
+    principalType: 'User'
     foundryId: foundry.outputs.accountId
   }
 }
