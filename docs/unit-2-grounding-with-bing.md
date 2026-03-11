@@ -17,7 +17,7 @@ By the end of this unit, your agent will be able to answer questions about the r
 Before starting this unit, make sure you have:
 
 - ✅ Completed [Unit 1: Creating a Declarative Agent in Foundry](./unit-1-declarative-agent.md)
-- ✅ Your **Lightbulb Assistant** agent is working in the Foundry playground
+- ✅ Your **Lightbulb-Agent** agent is working in the Foundry playground
 - ✅ Infrastructure deployed via `azd up` (this provisions the Bing Grounding resource automatically)
 - ✅ Access to the [Azure Portal](https://portal.azure.com) and the [Microsoft Foundry portal](https://ai.azure.com)
 
@@ -55,7 +55,7 @@ Before configuring the agent, let's verify that the Bing Grounding resource exis
 
 1. Open the [Azure Portal](https://portal.azure.com) and sign in with your Azure credentials.
 2. Navigate to your **resource group** — this is the one created during the `azd up` deployment.
-3. In the resource list, look for a resource with the type **Grounding with Bing Search**. It should have been provisioned automatically by the infrastructure-as-code templates.
+3. In the resource list, look for a resource with the type **Bing Resource**. It should have been provisioned automatically by the infrastructure-as-code templates.
 4. Click on the resource to view its details. Take note of:
    - The **resource name**
    - The **location/region**
@@ -72,10 +72,10 @@ Before configuring the agent, let's verify that the Bing Grounding resource exis
 Now let's connect the Bing Grounding resource to the agent you created in Unit 1.
 
 1. Open the [Microsoft Foundry portal](https://ai.azure.com) and navigate to your project.
-2. In the left-hand navigation, click on **Agents**.
-3. Select the **Lightbulb Assistant** agent you created in Unit 1 to open its configuration.
-4. Scroll down to the **Tools** section of the agent configuration.
-5. Click **+ Add Tool** (or the equivalent button to add a new tool).
+2. Select the **Build** tab on top-right. In the left-hand navigation, click on **Agents**.
+3. Select the **Lightbulb-Agent** agent you created in Unit 1 to open its configuration.
+4. Scroll down to the **Tools** section of the agent configuration. Remove the default **Web search (preview)** tool.
+5. Click **Add** and browse all the available tools. 
 6. From the list of available tool types, select **Grounding with Bing Search**.
 7. Foundry will prompt you to connect the resource:
    - Select the **Bing Grounding resource** from your Azure subscription.
@@ -93,7 +93,7 @@ Now let's connect the Bing Grounding resource to the agent you created in Unit 1
 
 Time to see the difference Bing Grounding makes! Let's test the agent with questions that require current information.
 
-1. In the Foundry portal, open the **playground** for your Lightbulb Assistant agent.
+1. In the Foundry portal, open the **playground** for your Lightbulb-Agent agent.
 2. Start by asking a question that requires up-to-date information:
 
    ```
@@ -127,7 +127,7 @@ Time to see the difference Bing Grounding makes! Let's test the agent with quest
    Turn on the light.
    ```
 
-   The agent should still respond as your Lightbulb Assistant — Bing Grounding doesn't replace the agent's core behavior, it **extends** it.
+   The agent should still respond as your Lightbulb-Agent — Bing Grounding doesn't replace the agent's core behavior, it **extends** it.
 
 > **💡 Tip:** Pay attention to the citations in the agent's responses. Grounded answers will often include links or references to the web sources used. This transparency is a key benefit — users can verify the information for themselves.
 
@@ -154,7 +154,7 @@ This pattern — extending agents through configuration — is a core principle 
 
 ### What's Next
 
-In **Unit 3**, we'll take things further by connecting the agent to an **MCP (Model Context Protocol) endpoint**. This will allow the agent to interact with external services and take real actions — like actually controlling that lightbulb.
+In **Unit 3**, we'll add **Knowledge Grounding with Files** — giving your agent the ability to answer questions using uploaded documents. This lets you ground your agent in domain-specific knowledge that isn't available on the web.
 
 ---
 

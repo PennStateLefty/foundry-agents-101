@@ -1,10 +1,10 @@
-# Unit 4: MCP Tools and State Changes
+# Unit 6: MCP Tools and State Changes
 
 ## Overview
 
-Welcome to Unit 4 — the **grand finale** of the **AI Agents with Microsoft Foundry** lab series! 🎉
+Welcome to Unit 6 of the **AI Agents with Microsoft Foundry** lab series! 🎉
 
-This is where everything comes together. In the previous units, you created a declarative agent, gave it web knowledge, and connected it to a read-only MCP server. Now you'll take the final step: connecting your agent to a **custom MCP server** that can **change real application state**.
+In the previous units, you created a declarative agent, gave it web knowledge, added file-based knowledge grounding, refined its instructions, and connected it to a read-only MCP server. Now you'll take the next big step: connecting your agent to a **custom MCP server** that can **change real application state**.
 
 You're going to connect your Foundry agent to the **lightbulb application** — the Python FastAPI app that was deployed during setup. This app exposes an MCP server with tools that can turn a lightbulb on and off, change its color, and read its current state. Your agent will call these tools, and you'll **watch the lightbulb change in real time** in the browser.
 
@@ -16,8 +16,8 @@ This is the moment it stops being a demo and starts feeling real. Your agent isn
 
 Before starting this unit, make sure you have:
 
-- ✅ Completed [Unit 3: MCP Connections](./unit-3-mcp-connections.md)
-- ✅ Your **Lightbulb Assistant** agent is working in the Foundry playground with Bing Grounding and the Microsoft Learn MCP connection
+- ✅ Completed [Unit 5: MCP Connections](./unit-5-mcp-connections.md)
+- ✅ Your **Lightbulb-Agent** agent is working in the Foundry playground with Bing Grounding, file-based knowledge grounding, structured instructions, and the Microsoft Learn MCP connection
 - ✅ The lightbulb application is deployed (this happened automatically during `azd up`)
 - ✅ Your **AZURE_WEBAPP_URL** — the URL of the deployed lightbulb app (from the `azd up` output or the Azure portal)
 
@@ -27,7 +27,7 @@ Before starting this unit, make sure you have:
 
 ## Understanding the Lightbulb MCP Server
 
-The lightbulb application isn't just a pretty UI — it's also an **MCP server**. The FastAPI backend mounts an MCP endpoint at `/mcp` using the **Streamable HTTP** transport (the same transport type you used in Unit 3 with Microsoft Learn).
+The lightbulb application isn't just a pretty UI — it's also an **MCP server**. The FastAPI backend mounts an MCP endpoint at `/mcp` using the **Streamable HTTP** transport (the same transport type you used in Unit 5 with Microsoft Learn).
 
 ### The MCP Endpoint
 
@@ -53,7 +53,7 @@ The lightbulb MCP server exposes **three tools**:
 | `toggle_light` | **Write** | Turns the lightbulb on if it's off, or off if it's on |
 | `set_color` | **Write** | Changes the lightbulb's color to one of: `red`, `green`, `blue`, `yellow`, or `white` |
 
-Notice the distinction between **read** and **write** operations. In Unit 3, the Microsoft Learn MCP server only exposed read tools — it could search and retrieve documentation, but it couldn't change anything. The lightbulb MCP server introduces **write tools** that modify application state. This is a big deal.
+Notice the distinction between **read** and **write** operations. In Unit 5, the Microsoft Learn MCP server only exposed read tools — it could search and retrieve documentation, but it couldn't change anything. The lightbulb MCP server introduces **write tools** that modify application state. This is a big deal.
 
 ### The Real-Time Frontend
 
@@ -88,20 +88,20 @@ Let's start by seeing the lightbulb application in its default state.
 Now let's give your agent the ability to control the lightbulb by connecting the MCP server.
 
 1. Open the [Microsoft Foundry portal](https://ai.azure.com) and navigate to your project.
-2. In the left-hand navigation, click on **Agents**.
-3. Select the **Lightbulb Assistant** agent to open its configuration.
+2. Select the **Build** tab on top-right. In the left-hand navigation, click on **Agents**.
+3. Select the **Lightbulb-Agent** agent to open its configuration.
 4. Scroll down to the **Tools** section (where you previously added the Microsoft Learn MCP connection).
-5. Click **+ Add Tool** to add a new tool.
-6. Select **MCP** from the list of tool types.
+5.  Click **Add** and browse all the available tools. 
+6. From the list of tool types, select **Custom** -> **MCP**.
 7. Configure the new MCP connection:
    - **Server URL:** Enter your lightbulb MCP endpoint:
      ```
      {AZURE_WEBAPP_URL}/mcp
      ```
      Replace `{AZURE_WEBAPP_URL}` with your actual app URL (e.g., `https://my-lightbulb-app.azurewebsites.net/mcp`).
-   - **Transport:** This should default to **Streamable HTTP** — leave it as-is.
-   - **Name:** Give it a recognizable name like `Lightbulb Controller`.
-8. Click **Connect** (or **Add**) to establish the connection.
+   - **Authentication:** **Unauthenticated**.
+   - **Name:** Give it a recognizable name like `Lightbulb-Controller`.
+8. Click **Connect** to establish the connection.
 9. Foundry will connect to your MCP server and **automatically discover** the three tools. You should see them listed:
    - `get_light_state`
    - `toggle_light`
@@ -110,7 +110,7 @@ Now let's give your agent the ability to control the lightbulb by connecting the
 
 > **💡 Tip:** Review the discovered tool descriptions. These are what the agent uses to decide *when* to call each tool. The better the descriptions, the smarter the agent's tool selection will be. Your lightbulb MCP server includes clear descriptions for each tool.
 
-> **📝 Note:** Your agent now has **two MCP connections** — Microsoft Learn (from Unit 3) and the Lightbulb Controller. The agent will intelligently choose which tools to use based on the user's request. Documentation questions go to Microsoft Learn; lightbulb commands go to the Lightbulb Controller.
+> **📝 Note:** Your agent now has **two MCP connections** — Microsoft Learn (from Unit 5) and the Lightbulb Controller. The agent will intelligently choose which tools to use based on the user's request. Documentation questions go to Microsoft Learn; lightbulb commands go to the Lightbulb Controller.
 
 ---
 
@@ -120,7 +120,7 @@ This is the moment you've been building toward. Time to watch your agent control
 
 1. Open **two browser tabs** (or windows) side by side:
    - **Tab 1:** The lightbulb application (your AZURE_WEBAPP_URL)
-   - **Tab 2:** The Foundry playground for your Lightbulb Assistant agent
+   - **Tab 2:** The Foundry playground for your Lightbulb-Agent agent
 
 2. In the Foundry playground, start with a simple command:
 
@@ -195,7 +195,7 @@ Now that you've seen the basics, let's push the boundaries and see how smart the
    Search Microsoft Learn for information about Azure App Service, then celebrate by turning the light to blue.
    ```
 
-   This request uses the Microsoft Learn MCP connection (Unit 3) *and* the Lightbulb Controller MCP connection (Unit 4) in a single conversation. Your agent seamlessly switches between tools!
+   This request uses the Microsoft Learn MCP connection (Unit 5) *and* the Lightbulb Controller MCP connection (Unit 6) in a single conversation. Your agent seamlessly switches between tools!
 
 > **📝 Note:** The agent may handle complex requests differently than you expect — that's part of the fun. If it doesn't get something right on the first try, rephrase your request or break it into smaller steps. This is how you learn to "prompt engineer" for tool-using agents.
 
@@ -203,23 +203,27 @@ Now that you've seen the basics, let's push the boundaries and see how smart the
 
 ## Summary
 
-**You did it!** 🎉 You've completed the full journey from a blank slate to a fully functional AI agent that can observe and change the real world through tools.
+**You did it!** 🎉 You've connected your agent to a custom MCP server that can observe and change the real world through tools.
 
-Let's look at everything you've accomplished across all four units:
+Let's look at everything you've accomplished across all six units:
 
 | Unit | What You Added | Capability |
 |---|---|---|
 | **Unit 1** | Declarative agent + system instructions | Agent has a persona and can chat |
 | **Unit 2** | Grounding with Bing | Agent can search the web for real-time information |
-| **Unit 3** | Microsoft Learn MCP connection | Agent can search and retrieve technical documentation |
-| **Unit 4** | Lightbulb MCP connection | Agent can **read and change real application state** |
+| **Unit 3** | File-based knowledge grounding | Agent can answer questions from uploaded documents with citations |
+| **Unit 4** | Structured instructions + conversational flow | Agent has behavioral boundaries, personality, and graceful edge case handling |
+| **Unit 5** | Microsoft Learn MCP connection | Agent can search and retrieve technical documentation |
+| **Unit 6** | Lightbulb MCP connection | Agent can **read and change real application state** |
 
 The progression tells the story of what makes AI agents powerful:
 
 1. **Start with a personality** — define what the agent is and how it should behave
-2. **Give it tools for information** — connect it to sources like Bing so it can answer questions
-3. **Give it read tools** — let it discover and retrieve data from external systems
-4. **Give it write tools** — let it take actions that change the world
+2. **Give it web knowledge** — connect it to Bing so it can answer questions about the world
+3. **Give it document knowledge** — upload files so it becomes a domain expert
+4. **Refine its instructions** — add structured prompts for polished, predictable behavior
+5. **Give it read tools** — let it discover and retrieve data from external systems via MCP
+6. **Give it write tools** — let it take actions that change the world
 
 And the remarkable part? **You didn't write a single line of agent code.** Everything was configured through the Foundry portal. The declarative agent pattern made it possible to go from zero to a fully capable, tool-using agent through configuration alone.
 
@@ -243,7 +247,7 @@ Here's a quick reference of the key concepts covered in this unit:
 
 ## 🎉 Congratulations!
 
-**You've completed the AI Agents with Microsoft Foundry lab series!**
+**You've completed Unit 6!**
 
 Take a moment to appreciate what you built. Starting from nothing, you now have:
 
@@ -255,9 +259,13 @@ Take a moment to appreciate what you built. Starting from nothing, you now have:
 
 This is the declarative agent pattern at its best: **powerful agents built through configuration, not code**.
 
-### What's Next?
+### What's Next
 
-The lab may be over, but your journey with AI agents is just beginning. Here are some ideas for where to go next:
+In **[Unit 7: Safety & Governance](./unit-7-safety-and-governance.md)**, you'll focus on **hardening your agent** — adding safety measures, content filters, and governance controls to make it production-ready. Your agent has all the tools and knowledge it needs; now it's time to make it safe and responsible.
+
+### Beyond the Lab
+
+The lab continues, but here are some ideas for further exploration:
 
 - **Build your own MCP server** — The lightbulb app is a great starting point. Study how it implements the MCP protocol in Python with FastAPI, then build your own server that exposes tools for your own application or API.
 

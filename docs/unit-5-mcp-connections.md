@@ -1,10 +1,10 @@
-# Unit 3: MCP Connections
+# Unit 5: MCP Connections
 
 ## Overview
 
-Welcome to Unit 3 of the **AI Agents with Microsoft Foundry** lab series! In this unit, you'll connect your agent to an external **MCP (Model Context Protocol) server** — giving it the ability to discover and use tools hosted outside of Foundry.
+Welcome to Unit 5 of the **AI Agents with Microsoft Foundry** lab series! In this unit, you'll connect your agent to an external **MCP (Model Context Protocol) server** — giving it the ability to discover and use tools hosted outside of Foundry.
 
-Up to this point, your agent has its own personality (Unit 1) and can search the web for real-time information (Unit 2). But what if your agent needs to interact with a specific service — like searching technical documentation, querying a database, or calling an API? That's where MCP comes in.
+Up to this point, your agent has its own personality (Unit 1), can search the web for real-time information (Unit 2), has deep product knowledge from uploaded documents (Unit 3), and follows a structured conversational flow (Unit 4). But what if your agent needs to interact with a specific service — like searching technical documentation, querying a database, or calling an API? That's where MCP comes in.
 
 You'll connect your agent to the **Microsoft Learn MCP endpoint**, a remote MCP server that exposes tools for searching and retrieving Microsoft documentation. After this unit, your agent will be able to answer technical questions by pulling directly from Microsoft's official docs.
 
@@ -16,8 +16,8 @@ Once again, you won't write a single line of code. MCP connections in Foundry ar
 
 Before starting this unit, make sure you have:
 
-- ✅ Completed [Unit 2: Grounding with Bing](./unit-2-grounding-with-bing.md)
-- ✅ Your **Lightbulb Assistant** agent is working in the Foundry playground with Bing Grounding enabled
+- ✅ Completed [Unit 4: Instructions & Conversational Flow](./unit-4-instructions-and-flow.md)
+- ✅ Your **Lightbulb-Agent** agent is working in the Foundry playground with Bing Grounding, file-based knowledge grounding, and structured instructions configured
 - ✅ Access to the [Microsoft Foundry portal](https://ai.azure.com)
 
 ---
@@ -58,7 +58,7 @@ MCP servers can communicate using different transport methods. The one you'll us
 
 Before we configure anything, let's understand how MCP fits into Foundry's architecture.
 
-In the previous units, you added **Grounding with Bing** as a tool to your agent, giving it access to real-time web information. Now you'll add a different kind of tool — an **MCP connection** — that lets the agent **call external services** directly.
+In earlier units, you added **Grounding with Bing** for web search, file-based knowledge grounding for product expertise, and structured instructions for conversational quality. Now you'll add a different kind of capability — an **MCP connection** — that lets the agent **call external services** directly.
 
 The Microsoft Learn MCP server, for example, exposes tools that can search Microsoft's documentation library and return specific articles, code samples, and technical guidance.
 
@@ -66,9 +66,10 @@ Here's how it fits together:
 
 | Capability | Source | What It Does |
 |---|---|---|
-| Personality & instructions | System prompt (Unit 1) | Defines how the agent behaves |
+| Personality & instructions | System prompt (Units 1 & 4) | Defines how the agent behaves with structured conversational flow |
 | Real-time web search | Grounding with Bing tool (Unit 2) | Searches the web for current information |
-| External tools | MCP connections (Unit 3) | Calls tools on remote servers |
+| Product knowledge | File-based grounding (Unit 3) | Answers questions from uploaded documents |
+| External tools | MCP connections (Unit 5) | Calls tools on remote servers |
 
 Foundry handles the MCP communication for you. When you add an MCP connection, Foundry will:
 
@@ -86,20 +87,20 @@ Foundry handles the MCP communication for you. When you add an MCP connection, F
 Now let's connect the Microsoft Learn MCP server to your agent.
 
 1. Open the [Microsoft Foundry portal](https://ai.azure.com) and navigate to your project.
-2. In the left-hand navigation, click on **Agents**.
-3. Select the **Lightbulb Assistant** agent to open its configuration.
+2. Select the **Build** tab on top-right. In the left-hand navigation, click on **Agents**.
+3. Select the **Lightbulb-Agent** agent to open its configuration.
 4. Scroll down to the **Tools** section of the agent configuration (where you previously added Bing Grounding).
-5. Click **+ Add Tool** (or the equivalent button to add a new tool).
-6. From the list of tool types, select **MCP**.
+5. Click **Add** and browse all the available tools. 
+6. From the list of tool types, select **Custom** -> **MCP**.
 7. You'll be prompted to configure the MCP connection:
-   - **Server URL:** Enter the Microsoft Learn MCP endpoint URL:
+   - **Server Endpoint:** Enter the Microsoft Learn MCP endpoint URL:
      ```
      https://learn.microsoft.com/api/mcp
      ```
-   - **Transport:** This should default to **Streamable HTTP** — leave it as-is.
-   - **Name:** Give it a recognizable name like `Microsoft Learn Docs`.
-8. Click **Connect** (or **Add**) to establish the connection.
-9. Foundry will reach out to the MCP server and discover its available tools. After a moment, you should see the tools listed under your new MCP connection.
+   - **Authentication:** Select **Unauthenticated**.
+   - **Name:** Give it a recognizable name like `Microsoft-Learn-Docs`.
+8. Click **Connect** to establish the connection.
+9. Foundry will reach out to the MCP server and discover its available tools.
 10. **Save** your agent configuration.
 
 > **💡 Tip:** After connecting, take a moment to review the tools that were discovered. You'll see the tool names, descriptions, and input schemas. This is exactly what the agent sees when deciding which tool to call — clear descriptions lead to better tool selection.
@@ -112,7 +113,7 @@ Now let's connect the Microsoft Learn MCP server to your agent.
 
 Time to see MCP in action! Let's test the agent with questions that will trigger it to use the Microsoft Learn tools.
 
-1. In the Foundry portal, open the **playground** for your Lightbulb Assistant agent.
+1. In the Foundry portal, open the **playground** for your Lightbulb-Agent agent.
 2. Start with a technical documentation question:
 
    ```
@@ -146,13 +147,13 @@ Time to see MCP in action! Let's test the agent with questions that will trigger
 
    Notice how the agent intelligently chooses the right tool for the job — Bing for general web queries, and the Microsoft Learn MCP tools for documentation lookups.
 
-6. And try a question that uses the agent's **core personality** from Unit 1:
+6. And try a question that uses the agent's **core persona** and **structured instructions** from earlier units:
 
    ```
    Turn on the light.
    ```
 
-   The agent still responds as your Lightbulb Assistant. MCP tools extend the agent — they don't replace its existing behavior.
+   The agent still responds as your Lightbulb-Agent with its polished conversational flow. MCP tools extend the agent — they don't replace its existing behavior. (The lightbulb will actually be controllable once you connect the Lightbulb MCP server in Unit 6.)
 
 > **💡 Tip:** Pay attention to the **tool calls** shown in the agent's response. Foundry's playground often displays which tools were invoked and what data was returned. This transparency is invaluable for understanding how your agent makes decisions.
 
@@ -168,18 +169,20 @@ Congratulations! 🎉 You've connected your agent to an external MCP server, giv
 |---|---|
 | Created a declarative agent in Foundry (Unit 1) | No custom tools that change application state |
 | Added Grounding with Bing for real-time web knowledge (Unit 2) | No persistent state or memory |
-| Connected to a remote MCP server for documentation search (Unit 3) | No custom MCP server |
+| Added file-based knowledge grounding with product manual (Unit 3) | No custom MCP server |
+| Refined instructions with structured conversational flow (Unit 4) | |
+| Connected to a remote MCP server for documentation search (Unit 5) | |
 | Agent intelligently chooses between knowledge sources and tools | |
 
 ### Key Takeaway
 
 MCP provides a **standardized way to extend agent capabilities** with external tools. Instead of building custom integrations for every service, you connect to an MCP server and the agent automatically discovers and uses the tools it offers. This is the same pattern whether you're connecting to Microsoft Learn, a database, a CRM, or any other MCP-enabled service.
 
-Notice the progression across the units: your agent started as a simple chatbot, gained web knowledge, and now has access to specialized tools — all through configuration.
+Notice the progression across the units: your agent started as a simple chatbot, gained web knowledge, added document expertise, received polished instructions, and now has access to specialized external tools — all through configuration.
 
 ### What's Next
 
-In **Unit 4**, we'll take the final step: connecting the agent to a **custom MCP server** that can actually **change application state** — like controlling that lightbulb for real. You'll see how MCP goes beyond read-only documentation search to enable agents that take real actions in the world.
+In **[Unit 6: MCP Tools & State](./unit-6-mcp-tools-state.md)**, you'll connect the agent to a **custom MCP server** that can actually **change application state** — like controlling that lightbulb for real. You'll see how MCP goes beyond read-only documentation search to enable agents that take real actions in the world.
 
 ---
 

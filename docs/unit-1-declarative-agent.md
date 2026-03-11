@@ -6,7 +6,7 @@ Welcome to Unit 1 of the **AI Agents with Microsoft Foundry** lab series! In thi
 
 A **declarative agent** in Foundry is configured entirely through the portal UI. Instead of writing code, you define the agent's behavior, instructions, and capabilities through a visual interface. Think of it like filling out a form that describes *what* your agent should do, rather than programming *how* it does it.
 
-By the end of this unit, you'll have a working agent that you can chat with in the Foundry playground. It won't be able to take actions in the real world yet — but it will serve as the foundation we build on in Units 2–4.
+By the end of this unit, you'll have a working agent that you can chat with in the Foundry playground. It won't be able to take actions in the real world yet — but it will serve as the foundation we build on in later units.
 
 ---
 
@@ -52,6 +52,8 @@ A declarative agent in Foundry has three core building blocks:
 3. Once signed in, you should see the Foundry portal home page.
 
 > **📝 Note:** If this is your first time signing in, you may be prompted to select a directory or accept terms of service. Follow the on-screen prompts to continue.
+>
+> **💡 Tip:** The Foundry portal supports both a **New** and **Classic** experience. This lab requires the **Foundry (New)** experience. If you see a toggle or banner at the top of the portal offering to switch between New and Classic, make sure **Foundry (New)** is selected. The new experience is agent-centric and has all the features used in this lab.
 
 ---
 
@@ -60,12 +62,12 @@ A declarative agent in Foundry has three core building blocks:
 Now let's create your first declarative agent.
 
 1. From the Foundry home page, find and select the project that was created during your `azd up` deployment.
-2. In the left-hand navigation, click on **Agents**.
-3. Click the **+ New Agent** button to start creating a new declarative agent.
+2. Select the **Build** tab on top-right. In the left-hand navigation, click on **Agents**.
+3. Click the **Create Agent** button to start creating a new declarative agent.
 4. Give your agent a name:
 
    ```
-   Lightbulb Assistant
+   Lightbulb-Agent
    ```
 
 5. In the **Instructions** field, enter the following system prompt:
@@ -75,7 +77,7 @@ Now let's create your first declarative agent.
    ```
 
 6. Leave the remaining settings at their defaults for now — we'll customize these in later units.
-7. Click **Create** to save your new agent.
+7. Click **Save** to save your new agent.
 
 > **💡 Tip:** Good instructions are specific about what the agent *can* do and *how* it should respond. Notice that we tell the agent to "confirm what you are doing" — this helps the user understand the agent's actions. In later units, we'll connect actual tools so the agent can *really* control a lightbulb.
 
@@ -114,7 +116,7 @@ With your agent created, let's take it for a spin in the Foundry playground.
    What's the weather today?
    ```
 
-   Notice how the agent responds — depending on the model, it may attempt to answer or politely redirect. This is a good example of why clear instructions matter.
+   Notice how the agent responds — depending on the model, it may attempt to answer or politely redirect. If a Foundry guardrail is configured, you may see a message like *"This interaction was blocked by a safety and security control."* This happens because Foundry's guardrails enforce that the agent stays within its declared scope, and a weather question falls outside that scope. Either way, this is a good example of why clear instructions matter.
 
 ---
 
