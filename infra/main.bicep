@@ -6,7 +6,7 @@ targetScope = 'resourceGroup'
 param environmentName string
 
 @description('Primary Azure region for resources')
-param location string
+param location string = resourceGroup().location
 
 @description('Principal ID of the user who needs Foundry access (defaults to the deployer)')
 param foundryUserPrincipalId string = deployer().objectId
