@@ -42,6 +42,11 @@ azd up
 
 This provisions all Azure resources (App Service, Foundry, Grounding with Bing) and deploys the lightbulb application.
 
+> **Note:** The deployment automatically grants the deployer the **Azure AI User** role on the Foundry resource. If a different user needs Foundry access, pass their principal ID during deployment:
+> ```bash
+> azd up --parameter foundryUserPrincipalId=<USER_OBJECT_ID>
+> ```
+
 ### 3. Start the lab
 
 Open [Unit 1](docs/unit-1-declarative-agent.md) and follow along!
