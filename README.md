@@ -12,8 +12,12 @@ A **lightbulb web application** (Python + React) with an MCP server that a Found
 |------|-------|-------------|
 | [Unit 1](docs/unit-1-declarative-agent.md) | Declarative Agent | Create your first agent in Microsoft Foundry |
 | [Unit 2](docs/unit-2-grounding-with-bing.md) | Grounding with Bing | Add web knowledge to your agent |
-| [Unit 3](docs/unit-3-mcp-connections.md) | MCP Connections | Connect to the Microsoft Learn MCP endpoint |
-| [Unit 4](docs/unit-4-mcp-tools-state.md) | MCP Tools & State | Control the lightbulb app via agent tool calls |
+| [Unit 3](docs/unit-3-knowledge-grounding-files.md) | Knowledge Grounding | Ground your agent with uploaded documents |
+| [Unit 4](docs/unit-4-instructions-and-flow.md) | Instructions & Flow | Craft structured system prompts and conversational design |
+| [Unit 5](docs/unit-5-mcp-connections.md) | MCP Connections | Connect to the Microsoft Learn MCP endpoint |
+| [Unit 6](docs/unit-6-mcp-tools-state.md) | MCP Tools & State | Control the lightbulb app via agent tool calls |
+| [Unit 7](docs/unit-7-safety-and-governance.md) | Safety & Governance | Apply responsible AI patterns and safety controls |
+| [Unit 8](docs/unit-8-evaluation-and-observability.md) | Evaluation & Observability | Trace agent reasoning and evaluate quality |
 
 ## Prerequisites
 
